@@ -1,69 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header';
-// import Footer from './components/Footer/Footer';
+// import InfoText from './components/InfoText/InfoText';
 import CardInfo from './components/CardInfo/CardInfo';
+import Footer from './components/Footer/Footer';
+import useDebounce from './hooks/useDebounce';
 import './App.css';
 
-
-function App() {
+const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState([]);
+  const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const token = process.env.REACT_APP_TOKEN;
-  console.log(token)
+  const [error, setError] = useState(null);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const token = 'ffcf671fc1282d5bebf9629654bf049a';
 
   useEffect(() => {
-    if (searchTerm.trim() === '') {
-      setResults([]);
+    if (!debouncedSearchTerm.trim()) {
+      setCharacters([]);
       return;
     }
 
-    const fetchData = async () => {
+    const fetchCharacters = async () => {
       setLoading(true);
-      setError('');
+      setError(null);
       try {
         const response = await axios.get(
-          `https://superheroapi.com/api.php/${token}/search/${searchTerm}`
+          `https://superheroapi.com/api.php/${token}/search/${debouncedSearchTerm}`
         );
-        if (response.data.response === "success") {
-          setResults(response.data.results);
+        if (response.data.response === 'success') {
+          setCharacters(response.data.results);
         } else {
-          setResults([]);
-          setError("Nenhum resultado encontrado.");
+          setCharacters([]);
+          setError('Nenhum resultado encontrado.');
         }
-      } catch {
-        setError("Erro ao buscar.");
+      } catch (err) {
+        setError('Erro ao buscar personagens.');
       } finally {
         setLoading(false);
       }
     };
 
-    const delay = setTimeout(fetchData, 500);
-    return () => clearTimeout(delay);
-  }, [searchTerm]);
+    fetchCharacters();
+  }, [debouncedSearchTerm]);
 
   return (
-    <div className="app-container">
-      <div className="left-panel">
-        <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <p className="instructions">
-          Digite o nome de um herói ou vilão para ver as informações.
-        </p>
+    <div className="app-wrapper">
+      <div className="main-content">
+        <aside className="sidebar">
+          <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          {/* <InfoText /> */}
+        </aside>
+
+        <main className="content">
+          {loading && <p>Carregando...</p>}
+          {error && <p>{error}</p>}
+          <div className="card-list">
+            {characters.map((character) => (
+              <CardInfo key={character.id} hero={character} />
+            ))}
+          </div>
+        </main>
       </div>
-      <div className="right-panel">
-        {loading && <p>Carregando...</p>}
-        {error && <p>{error}</p>}
-        <div className="cards-container">
-          {results.map((item) => (
-            <CardInfo key={item.id} hero={item} />
-          ))}
-        </div>
-      </div>
-      
+
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
