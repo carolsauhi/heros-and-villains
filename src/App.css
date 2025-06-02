@@ -19,7 +19,7 @@ html, body, #root {
 
 /* Sidebar (esquerda) */
 .sidebar {
-  width: 300px;
+  width: 350px;
   padding: 20px;
   background-color: #f7f7f7;
   border-right: 1px solid #ddd;
