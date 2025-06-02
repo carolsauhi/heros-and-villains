@@ -5,6 +5,7 @@
   font-size: 16px;
   border-radius: 5px;
   border: none;
+  margin-bottom: 10px;
 }
 
 .search-wrapper {
@@ -32,4 +33,16 @@
 
 .clear-button:hover {
   color: #000;
+}
+
+@media (max-width: 480px) {
+  .search-wrapper input {
+    font-size: 14px;
+    padding-right: 1.5rem;
+  }
+
+  .clear-button {
+    font-size: 1rem;
+    right: 0.3rem;
+  }
 }

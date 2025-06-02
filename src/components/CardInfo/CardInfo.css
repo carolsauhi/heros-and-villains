@@ -44,3 +44,10 @@
 .details-button:hover {
   background-color: #444;
 }
+
+@media (max-width: 768px) {
+  .card-info {
+    width: 100%;
+    max-width: 300px;
+  }
+}

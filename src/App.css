@@ -65,3 +65,26 @@ html, body, #root {
 .footer a:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 16px;
+    align-items: center;
+  }
+
+  .content {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .card-list {
+    justify-content: center;
+  }
+}

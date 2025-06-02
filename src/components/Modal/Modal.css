@@ -63,3 +63,19 @@
   transform: scale(1.1);
   color: #d32f2f; /* vermelho mais forte */
 }
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .modal-image {
+    width: 100%;
+  }
+
+  .modal-close svg {
+    width: 20px;
+    height: 20px;
+  }
+}
