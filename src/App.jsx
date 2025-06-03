@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header/Header';
-// import InfoText from './components/InfoText/InfoText';
 import CardInfo from './components/CardInfo/CardInfo';
 import Footer from './components/Footer/Footer';
 import useDebounce from './hooks/useDebounce';
@@ -13,7 +12,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
-  const token = 'ffcf671fc1282d5bebf9629654bf049a';
+  const token = process.env.REACT_APP_API_TOKEN;
 
   useEffect(() => {
     if (!debouncedSearchTerm.trim()) {
