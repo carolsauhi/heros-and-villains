@@ -31,10 +31,10 @@ const App = () => {
           setCharacters(response.data.results);
         } else {
           setCharacters([]);
-          setError('Nenhum resultado encontrado.');
+          setError('No results found.');
         }
       } catch (err) {
-        setError('Erro ao buscar personagens.');
+        setError('Error searching for characters.');
       } finally {
         setLoading(false);
       }
@@ -52,7 +52,7 @@ const App = () => {
         </aside>
 
         <main className="content">
-          {loading && <p>Carregando...</p>}
+          {loading && <p>Loading...</p>}
           {error && <p>{error}</p>}
           <div className="card-list">
             {characters.map((character) => (
