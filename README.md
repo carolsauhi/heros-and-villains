@@ -2,6 +2,12 @@
 
 Um projeto React criado para explorar o uso de APIs externas e aprimorar habilidades em desenvolvimento front-end. Inspirado no universo dos super-heróis e vilões, este aplicativo permite buscar personagens e exibir informações detalhadas de forma interativa.
 
+<br>
+
+<p align="center">
+  <img alt="Preview do projeto desenvolvido." src=".github/preview-herores-and-villains.png" width="100%">
+</p>
+
 ## 🚀 Tecnologias Utilizadas
 
 * **React**: Biblioteca JavaScript para construção de interfaces de usuário.
